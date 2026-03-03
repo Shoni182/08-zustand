@@ -1,7 +1,11 @@
 // app/notes/filter/[...slug]/page.tsx
+import { fetchNoteById } from "@/lib/api";
 import Notes from "./Notes.client";
 
 //?   SSR server side rendering - default mode
+
+import type { Metadata } from "next";
+
 //
 
 type Props = {
@@ -13,6 +17,33 @@ type NoteParams = {
   query: string;
   tag?: string;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const tag = slug[0] === "all" ? undefined : slug[0];
+
+  const pageNotes = await fetchNotes({
+    page: 1,
+    query: "",
+    tag: tag,
+  });
+
+  return {
+    title: "Notes",
+    description: `Page - Note-Hub ${tag}`,
+    openGraph: {
+      title: "Note-Hub not found",
+      description: "Page - Note-Hub is not foun",
+      url: "https://08-zustand-eight-beta.vercel.app",
+      images: {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 640,
+        height: 640,
+        alt: "NoteHub Logo image",
+      },
+    },
+  };
+}
 
 //: Libraries
 import {
