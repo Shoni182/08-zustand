@@ -9,10 +9,31 @@ import {
 import NoteDetails from "./NoteDetails.client";
 import { fetchNoteById } from "@/lib/api";
 
+import type { Metadata } from "next";
 // Типізація
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const note = await fetchNoteById(id);
+  return {
+    title: `${note.title} `,
+    description: note.content.slice(0, 30),
+    openGraph: {
+      title: `${note.title}`,
+      description: note.content.slice(0, 30),
+      url: "https://08-zustand-eight-beta.vercel.app",
+      images: {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 640,
+        height: 640,
+        alt: "NoteHub Logo image",
+      },
+    },
+  };
+}
 
 // Функція
 // : Server prefetch
