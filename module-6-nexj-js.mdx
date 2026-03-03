@@ -1,0 +1,55 @@
+## Процес динамічної маршрутизації Prefetch + Hidrate
+
+localhost:3000/notes
+
+# Fetching - preferching on server component
+
+1. Next server виконує компонент page - app/notes/page.tsx
+2. Виконується запис з queryClient.prefetchQuery
+3. Результат запиту зберігається у кеші queryClient
+
+# Use prefethced chache for client component
+
+4. Виконується компонент NoteListPage
+5. Отримує даннні від queryClient
+6. В браузер відправляється сторінка
+7. В браузері ініціалізується useQuery
+8. useQuery вже використовує кеш queryClient ["notes"]
+9. refetchOnMount: false щоб не робити зайвий запит тому що
+
+- ці данні вже є в кеші queryClient["notes"]
+
+# H1 MDX Інструкція
+
+## H2
+
+### H3
+
+## Текст
+
+**Жирний текст**  
+_Курсив_  
+~~Закреслений~~
+
+## Списки
+
+- Пункт 1
+- Пункт 2
+
+1. Перший
+2. Другий
+
+## Цитата
+
+> Це приклад цитати
+
+## Код
+
+`inline code`
+
+```js
+const message = "Hello MDX"
+console.log(message)
+
+
+```
