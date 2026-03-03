@@ -22,17 +22,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0] === "all" ? undefined : slug[0];
 
-  const pageNotes = await fetchNotes({
-    page: 1,
-    query: "",
-    tag: tag,
-  });
+  // const pageNotes = await fetchNotes({
+  //   page: 1,
+  //   query: "",
+  //   tag: tag,
+  // });
 
   return {
-    title: "Notes",
+    title: `Notes ${tag} `,
     description: `Page - Note-Hub ${tag}`,
     openGraph: {
-      title: "Note-Hub not found",
+      title: `Notes ${tag}`,
       description: "Page - Note-Hub is not foun",
       url: "https://08-zustand-eight-beta.vercel.app",
       images: {
