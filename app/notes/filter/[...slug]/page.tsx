@@ -6,8 +6,6 @@ import Notes from "./Notes.client";
 
 import type { Metadata } from "next";
 
-//
-
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
@@ -22,19 +20,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0] === "all" ? undefined : slug[0];
 
-  const pageNotes = await fetchNotes({
-    page: 1,
-    query: "",
-    tag: tag,
-  });
-
   return {
-    title: `Notes ${tag} `,
-    description: `Page - Note-Hub ${tag}`,
+    title: `Notes: ${tag}`,
+    description: "Notes desc",
     openGraph: {
-      title: `Notes ${tag}`,
-      description: "Page - Note-Hub is not foun",
-      url: "https://08-zustand-eight-beta.vercel.app",
+      title: `Notes: ${tag}`,
+      description: "Notes desc",
+      url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${tag}`,
       images: {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
         width: 640,
@@ -55,7 +47,6 @@ import {
 //: Component
 
 import { fetchNotes } from "@/lib/api";
-// import { NoteTag } from "@/types/note";
 
 // : Server prefetch
 const NotesPage = async ({ params }: Props) => {
