@@ -19,13 +19,14 @@ type NoteParams = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0] === "all" ? undefined : slug[0];
-  const queryParams: NoteParams = {
-    page: 1,
-    query: "",
-    tag: tag,
-  };
+  // const queryParams: NoteParams = {
+  //   page: 1,
+  //   query: "",
+  //   tag: tag,
+  // };
+  console.log(tag);
 
-  const notes = await fetchNotes(queryParams);
+  // const notes = await fetchNotes(queryParams);
 
   return {
     title: `Notes: ${tag}`,
