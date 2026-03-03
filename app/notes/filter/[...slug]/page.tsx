@@ -18,17 +18,17 @@ type NoteParams = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const tag = slug[0] === "all" ? undefined : slug[0];
+  // const tag = slug[0] === "all" ? undefined : slug[0];
 
   // Handle the 'all' case or empty slugs
-  // const isAll = !slug || slug[0] === "all";
-  // const tag = isAll ? "All Topics" : slug[0];
+  const isAll = !slug || slug[0] === "all";
+  const tag = isAll ? "All Topics" : slug[0];
 
   // Construct the URL carefully to avoid 'undefined' strings in the path
-  // const baseUrl = "https://08-zustand-eight-beta.vercel.app";
-  // const shareUrl = isAll
-  //   ? `${baseUrl}/notes/filter/all`
-  //   : `${baseUrl}/notes/filter/${slug[0]}`;
+  const baseUrl = "https://08-zustand-eight-beta.vercel.app";
+  const shareUrl = isAll
+    ? `${baseUrl}/notes/filter/all`
+    : `${baseUrl}/notes/filter/${slug[0]}`;
 
   return {
     title: `Notes: ${tag}`,
@@ -36,7 +36,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `Notes: ${tag}`,
       description: "Notes desc",
-      url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${slug[0]}`,
+      // url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${slug[0]}`,
+      url: shareUrl,
       images: {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
         width: 640,
