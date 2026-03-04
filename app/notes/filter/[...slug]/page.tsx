@@ -16,22 +16,15 @@ type NoteParams = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const tag = slug[0] === "all" ? "All" : slug[0];
-  const useTags =
-    tag === "All" || "Todo" || "Work" || "Personal" || "Meeting" || "Shopping"
-      ? tag
-      : "All";
-
-  // тут проблема полягає в тому що слаг на all буде видавати undefined
-  // Треба відфільрувати тільки ті параметри які існують всі ішні ні
+  const tag = slug[0] === "all" ? undefined : slug[0];
 
   return {
-    title: `Notes: ${useTags}`,
+    title: `Notes: ${tag}`,
     description: "Notes description",
     openGraph: {
-      title: `Notes:ddddd`,
+      title: `Notes:${tag}`,
       description: "Notes description",
-      url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${useTags}`,
+      url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${tag}`,
       images: {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
         width: 640,
