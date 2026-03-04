@@ -94,9 +94,9 @@ export default function NoteForm() {
       </div>
 
       <div className={css.actions}>
-        <button type="button" className={css.cancelButton} onClick={close}>
+        {/* <button type="button" className={css.cancelButton} onClick={close}>
           Cancel
-        </button>
+        </button> */}
         <button type="submit" className={css.submitButton} disabled={false}>
           Create note
         </button>
