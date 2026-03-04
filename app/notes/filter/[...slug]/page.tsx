@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Notes: ${useTags}`,
     description: "Notes description",
     openGraph: {
-      title: `Notes: ${useTags}`,
+      title: `Notes:ddddd`,
       description: "Notes description",
       url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${useTags}`,
       images: {
