@@ -7,6 +7,7 @@ import type { NewNote } from "@/types/note";
 import type { NoteTag } from "@/types/note";
 // import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import { useNoteDraftStore } from "@/lib/store/noteStore";
 
 // metatags
 import { Metadata } from "next";
@@ -44,6 +45,23 @@ const initialValues: NewNote = {
 };
 
 export default function NoteForm() {
+  // 2. Викликаємо хук і отримуємо значення
+  const { draft, setDraft, clearDraft } = useNoteDraftStore();
+
+  // 3. Оголошуємо функцію для onChange щоб при зміні будь-якого
+  // елемента форми оновити чернетку нотатки в сторі
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    // 4. Коли користувач змінює будь-яке поле форми — оновлюємо стан
+    setDraft({
+      ...draft,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   const handleSubmit = (formData: FormData) => {
     const note: NewNote = {
       title: formData.get("title") as string,
@@ -61,7 +79,8 @@ export default function NoteForm() {
     mutationFn: (noteData: NewNote) => createNote(noteData),
     onSuccess: () => (
       queryClient.invalidateQueries({ queryKey: ["notes"] }),
-      router.back()
+      clearDraft(),
+      router.push("/notes/filter/all")
     ),
   });
 
@@ -69,7 +88,14 @@ export default function NoteForm() {
     <form className={css.form} action={handleSubmit}>
       <div className={css.formGroup}>
         <label htmlFor="title">Title</label>
-        <input id="title" type="text" name="title" className={css.input} />
+        <input
+          id="title"
+          type="text"
+          name="title"
+          className={css.input}
+          defaultValue={draft?.title}
+          onChange={handleChange}
+        />
         {/* <ErrorMessage component="span" name="title" className={css.error} /> */}
       </div>
 
@@ -80,13 +106,21 @@ export default function NoteForm() {
           name="content"
           rows={8}
           className={css.textarea}
+          defaultValue={draft?.content}
+          onChange={handleChange}
         />
         {/* <ErrorMessage component="span" name="content" className={css.error} /> */}
       </div>
 
       <div className={css.formGroup}>
         <label htmlFor="tag">Tag</label>
-        <select id="tag" name="tag" className={css.select}>
+        <select
+          id="tag"
+          name="tag"
+          className={css.select}
+          defaultValue={draft?.tag}
+          onChange={handleChange}
+        >
           <option value="Todo">Todo</option>
           <option value="Work">Work</option>
           <option value="Personal">Personal</option>
