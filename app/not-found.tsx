@@ -3,10 +3,10 @@ import css from "@/app/NotFound.module.css";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Note-Hub not found",
-  description: "Page - Note-Hub is not foun",
+  description: "Page - Note-Hub is not found",
   openGraph: {
     title: "Note-Hub not found",
-    description: "Page - Note-Hub is not foun",
+    description: "Page - Note-Hub is not found",
     url: "https://08-zustand-eight-beta.vercel.app",
     images: {
       url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
