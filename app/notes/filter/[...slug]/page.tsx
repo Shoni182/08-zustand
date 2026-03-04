@@ -1,10 +1,8 @@
 // app/notes/filter/[...slug]/page.tsx
-import { fetchNoteById } from "@/lib/api";
+//  SSR server side rendering - default mode
 import Notes from "./Notes.client";
-
-//?   SSR server side rendering - default mode
-
 import type { Metadata } from "next";
+import type { NoteTag } from "@/types/note";
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -19,16 +17,21 @@ type NoteParams = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0] === "all" ? "All" : slug[0];
+  const useTags =
+    tag === "All" || "Todo" || "Work" || "Personal" || "Meeting" || "Shopping"
+      ? tag
+      : false;
 
   // тут проблема полягає в тому що слаг на all буде видавати undefined
+  // Треба відфільрувати тільки ті параметри які існують всі ішні ні
 
   return {
-    title: `Notes: ${tag}`,
+    title: `Notes: ${useTags}`,
     description: "Notes description",
     openGraph: {
-      title: `Notes: ${tag}`,
+      title: `Notes: ${useTags}`,
       description: "Notes description",
-      url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${tag}`,
+      url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${useTags}`,
       images: {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
         width: 640,
