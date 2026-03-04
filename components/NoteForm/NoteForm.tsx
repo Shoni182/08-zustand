@@ -14,7 +14,7 @@ type Props = {
   params: NewNote;
 };
 
-//! Добавити Router
+// Добавити Router
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { title, content } = await params;
