@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { NewNote } from "@/types/note";
 import type { NoteTag } from "@/types/note";
 // import * as Yup from "yup";
+import { useRouter } from "next/navigation";
 
 // metatags
 import { Metadata } from "next";
@@ -52,13 +53,15 @@ export default function NoteForm() {
     mutate(note);
   };
 
+  const router = useRouter();
+
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: (noteData: NewNote) => createNote(noteData),
     onSuccess: () => (
       queryClient.invalidateQueries({ queryKey: ["notes"] }),
-      close()
+      router.back()
     ),
   });
 
