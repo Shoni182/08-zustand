@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const useTags =
     tag === "All" || "Todo" || "Work" || "Personal" || "Meeting" || "Shopping"
       ? tag
-      : false;
+      : "All";
 
   // тут проблема полягає в тому що слаг на all буде видавати undefined
   // Треба відфільрувати тільки ті параметри які існують всі ішні ні
