@@ -18,14 +18,16 @@ type NoteParams = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const tag = slug[0] === "all" ? undefined : slug[0];
+  const tag = slug[0] === "all" ? "All" : slug[0];
+
+  // тут проблема полягає в тому що слаг на all буде видавати undefined
 
   return {
     title: `Notes: ${tag}`,
-    description: "Notes desc",
+    description: "Notes description",
     openGraph: {
       title: `Notes: ${tag}`,
-      description: "Notes desc",
+      description: "Notes description",
       url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${tag}`,
       images: {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
