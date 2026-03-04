@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 // import { toast, Toaster } from "react-hot-toast";
 import css from "./Notes.module.css";
+import Link from "next/link";
 
 //: Components
 import Modal from "@/components/Modal/Modal";
@@ -77,15 +78,19 @@ const Notes = ({ tag }: Props) => {
           />
         )}
 
-        <button className={css.button} onClick={openModal}>
+        {/* <button className={css.button} onClick={openModal}>
           Create note +
-        </button>
+        </button> */}
 
-        {isModalOpen && (
+        <Link href={`/notes/action/create`} className={css.button}>
+          Create note +
+        </Link>
+
+        {/* {isModalOpen && (
           <Modal close={closeModal}>
             <NoteForm close={closeModal} />
           </Modal>
-        )}
+        )} */}
       </header>
       {/* {isLoading && <strong>Завантаження</strong>} */}
       {/* {isError && toast.error("Щось пішло не так!")} */}
