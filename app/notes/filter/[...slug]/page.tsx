@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0];
 
-  if (tag === "all") {
+  if (!tag) {
     return {
       title: `All notes`,
       description: `Page includes all notes`,
