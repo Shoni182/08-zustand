@@ -40,10 +40,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `Notes: ${tag}`,
-    description: `All notes that includes ${tag} tags`,
+    description: `Notes that includes ${tag} tags`,
     openGraph: {
       title: `Notes:${tag}`,
-      description: `All notes that includes ${tag} tags`,
+      description: `Notes that includes ${tag} tags`,
       url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${tag}`,
       images: [
         {
