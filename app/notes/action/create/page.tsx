@@ -1,10 +1,8 @@
 import css from "./CreateNote.module.css";
 import NoteForm from "@/components/NoteForm/NoteForm";
+import type { Metadata } from "next";
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
-  const note = await fetchNoteById(id);
-
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Create a note",
     description: "Page for creating a new note",
