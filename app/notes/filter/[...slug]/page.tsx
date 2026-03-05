@@ -16,7 +16,8 @@ type NoteParams = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const tag = slug[0] === "all" ? "all" : slug[0];
+  // const tag = slug[0] === "all" ? undefined : slug[0];
+  const tag = slug[0];
 
   return {
     title: `Notes: ${tag}`,
@@ -25,12 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `Notes:${tag}`,
       description: `All notes that includes ${tag} tags`,
       url: `https://08-zustand-eight-beta.vercel.app/notes/filter/${tag}`,
-      images: {
-        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-        width: 640,
-        height: 640,
-        alt: "NoteHub Logo image",
-      },
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 640,
+          height: 640,
+          alt: "NoteHub Logo image",
+        },
+      ],
     },
   };
 }
