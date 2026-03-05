@@ -84,6 +84,10 @@ export default function NoteForm() {
     ),
   });
 
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
     <form className={css.form} action={handleSubmit}>
       <div className={css.formGroup}>
@@ -131,9 +135,9 @@ export default function NoteForm() {
       </div>
 
       <div className={css.actions}>
-        {/* <button type="button" className={css.cancelButton} onClick={close}>
+        <button type="button" className={css.cancelButton} onClick={handleBack}>
           Cancel
-        </button> */}
+        </button>
         <button type="submit" className={css.submitButton} disabled={false}>
           Create note
         </button>
