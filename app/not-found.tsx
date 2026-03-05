@@ -8,12 +8,14 @@ export const metadata: Metadata = {
     title: "Note-Hub not found",
     description: "Page - Note-Hub is not found",
     url: "https://08-zustand-eight-beta.vercel.app",
-    images: {
-      url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-      width: 640,
-      height: 640,
-      alt: "NoteHub Logo image",
-    },
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 640,
+        height: 640,
+        alt: "NoteHub Logo image",
+      },
+    ],
   },
 };
 

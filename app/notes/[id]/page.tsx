@@ -26,12 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${note.title}`,
       description: note.content.slice(0, 30),
       url: `https://08-zustand-eight-beta.vercel.app/notes/${id}`,
-      images: {
-        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-        width: 640,
-        height: 640,
-        alt: "NoteHub Logo image",
-      },
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 640,
+          height: 640,
+          alt: "NoteHub Logo image",
+        },
+      ],
     },
   };
 }
