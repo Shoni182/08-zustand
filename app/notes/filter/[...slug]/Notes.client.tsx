@@ -6,22 +6,14 @@ import { fetchNotes } from "@/lib/api";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-// import { toast, Toaster } from "react-hot-toast";
 import css from "./Notes.module.css";
 import Link from "next/link";
 
 //: Components
-import Modal from "@/components/Modal/Modal";
+
 import Pagination from "@/components/Pagination/Pagination";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import NoteList from "@/components/NoteList/NoteList";
-
-// import { FetchNotesResponse } from "@/lib/api";
-
-// interface InitialValuesProps {
-//   initialValues: { tag?: string };
-// }
 
 type Props = {
   tag?: string;
@@ -34,11 +26,6 @@ const Notes = ({ tag }: Props) => {
   //: Pages
   // const perPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
-
-  //: Modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   //: Search and Debounce
   const [query, setQuery] = useState("");
@@ -78,23 +65,10 @@ const Notes = ({ tag }: Props) => {
           />
         )}
 
-        {/* <button className={css.button} onClick={openModal}>
-          Create note +
-        </button> */}
-
         <Link href={`/notes/action/create`} className={css.button}>
           Create note +
         </Link>
-
-        {/* {isModalOpen && (
-          <Modal close={closeModal}>
-            <NoteForm close={closeModal} />
-          </Modal>
-        )} */}
       </header>
-      {/* {isLoading && <strong>Завантаження</strong>} */}
-      {/* {isError && toast.error("Щось пішло не так!")} */}
-      {/* <Toaster /> */}
       {data?.notes && <NoteList notes={data.notes} />}
     </div>
   );
